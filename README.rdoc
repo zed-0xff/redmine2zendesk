@@ -1,0 +1,3 @@
+= redmine2zendesk
+
+Updates Zendesk ticket status when corresponding Redmine ticket is closed.

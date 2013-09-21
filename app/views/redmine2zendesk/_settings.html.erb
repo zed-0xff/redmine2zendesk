@@ -1,0 +1,64 @@
+<style>
+  .redmine2zendesk table {
+    border: solid 1px #aaa;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    min-width: 40em;
+  }
+  .redmine2zendesk table caption {
+    font-weight: bold;
+  }
+</style>
+
+<div class="redmine2zendesk">
+  <table>
+    <caption>Zendesk settings</caption>
+    <tr>
+      <th>subdomain</th>
+      <td><%= text_field_tag 'settings[zendesk_subdomain]', settings['zendesk_subdomain'] %>.zendesk.com</td>
+    </tr>
+    <tr>
+      <th>authorized user email</th>
+      <td><%= text_field_tag 'settings[zendesk_user_email]', settings['zendesk_user_email'] %></td>
+    </tr>
+    <tr>
+      <th>authorized user password</th>
+      <td><%= password_field_tag 'settings[zendesk_user_password]', settings['zendesk_user_password'] %></td>
+    </tr>
+    <tr>
+      <th>ticket field to update</th>
+      <td><%= text_field_tag 'settings[zendesk_ticket_field]', settings['zendesk_ticket_field'] %> (e.g. "status")</td>
+    </tr>
+    <tr>
+      <th>new field value</th>
+      <td><%= text_field_tag 'settings[zendesk_ticket_value]', settings['zendesk_ticket_value'] %> (e.g. "pending")</td>
+    </tr>
+    <tr>
+      <th>add internal comment</th>
+      <td>
+        <%= text_area_tag 'settings[zendesk_ticket_comment]', settings['zendesk_ticket_comment'], :cols => 40, :rows => 4 %>
+        <br/>
+        (<b><tt>REDMINE_ISSUE_ID</tt></b> &amp; <b><tt>REDMINE_ISSUE_STATUS</tt></b><br/>will be replaced with corresponding values)
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <caption>Redmine settings</caption>
+    <tr>
+      <th>ticket statuses to process</th>
+      <td>
+        <%= select_tag 'settings[redmine_ticket_statuses]',
+          options_from_collection_for_select(IssueStatus.all, :id, :name, settings['redmine_ticket_statuses']),
+          :multiple => true %>
+      </td>
+    </tr>
+    <tr>
+      <th>Redmine field that keeps Zendesk ticket id</th>
+      <td>
+        <%= select_tag 'settings[redmine_ticket_id_field]',
+          options_from_collection_for_select(CustomField.all, :id, :name, settings['redmine_ticket_id_field']) %>
+      </td>
+    </tr>
+  </table>
+</div>
