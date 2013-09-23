@@ -1,3 +1,5 @@
 = redmine2zendesk
 
 Updates Zendesk ticket status when corresponding Redmine ticket is closed.
+
+Tested with Redmine 2.2.x
