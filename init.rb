@@ -1,5 +1,7 @@
 require_dependency 'redmine2zendesk_issue_change_listener'
 
+require File.expand_path("app/helpers/redmine2zendesk_helper", File.dirname(__FILE__))
+
 Redmine::Plugin.register :redmine2zendesk do
   name        'redmine2zendesk'
   author      'Andrey "Zed" Zaikin'
@@ -11,4 +13,8 @@ Redmine::Plugin.register :redmine2zendesk do
     'zendesk_ticket_field' => "status",
     'zendesk_ticket_value' => "pending"
   }
+end
+
+ActionDispatch::Reloader.to_prepare do
+  IssuesController.send :helper, Redmine2zendeskHelper
 end
