@@ -59,6 +59,9 @@ class ZendeskNotifier
     }
     #p res
     #p res.body
+    if res.body['"error":']
+      Rails.logger.error "redmine2zendesk: error updating ticket: #{res.body.inspect}"
+    end
   rescue
     Rails.logger.fatal $!
   end
